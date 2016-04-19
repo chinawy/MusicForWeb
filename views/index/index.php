@@ -12,11 +12,20 @@ $this->title = '数据列表';
 <!--音频播放插件-->
 <?= Html::cssFile('@web/public/jquery-Aplayer/Aplayer.min.css') ?>
 <?= Html::jsFile('@web/public/jquery-Aplayer/Aplayer.min.js') ?>
-<!--视频播放-->
-
 <style>
     body{
-        background-image : url("/public/images/bg2.jpg");
+        /* 加载背景图 */
+        background-image : url("/public/images/bg.jpg");
+        /* 背景图垂直、水平均居中 */
+        background-position: center center;
+        /* 背景图不平铺 */
+        background-repeat: no-repeat;
+        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+        background-attachment: fixed;
+        /* 让背景图基于容器大小伸缩 */
+        background-size: cover;
+        /* 设置背景颜色，背景图加载过程中会显示背景色 */
+        background-color: #464646;
     }
     .oust{
         border-radius: 40%;
@@ -43,6 +52,7 @@ $this->title = '数据列表';
     }
     .table{
         width: 625px!important;
+        height: 300px!important;
         margin-top: 123px!important;
     }
     .table tbody tr{
@@ -121,6 +131,23 @@ $this->title = '数据列表';
         margin-left: 5px;
         display: none;
     }
+    #videoBox{
+        display: none;
+        width: 600px;
+        min-height: 340px;
+        position:fixed;
+        z-index: 100;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.4);
+    }
+    #videoBox .close{
+        position: absolute;
+        top:0px;
+        right: -20px;
+        font-size: 15px;
+    }
 </style>
 <div class="panel panel-default">
     <div class="panel-heading"></div>
@@ -134,12 +161,18 @@ $this->title = '数据列表';
         </span>
             </div>
         </div>
+        <!--mp3-->
         <div id="player1" class="aplayer">
             <div class="aplayer-pic">
-                <img src="/public/images/disc.png">
+                <img src="/public/images/disc.jpg">
             </div>
         </div>
     </div>
+</div>
+<!--video-->
+<div id="videoBox">
+    <div id="video"></div>
+    <a href="javascript:;" class="close glyphicon glyphicon-remove"></a>
 </div>
 <table class="table" style="display: none">
     <thead>
@@ -317,7 +350,7 @@ $this->title = '数据列表';
                                         title: title,
                                         author: author,
                                         url: data['url'],
-                                        pic: '/public/images/disc.png'
+                                        pic: '/public/images/disc.jpg'
                                     }
                                 });
                                 ap1.init();
@@ -348,13 +381,8 @@ $this->title = '数据列表';
                     data:{'hash':hash},
                     success:function(data){
                         if(data['status']){
-                            layer.open({
-                                title: false,
-                                type: 2,
-                                area: ['500px', '360px;'],
-                                skin: 'layui-layer-rim', //加上边框
-                                content: [data['url']]
-                            });
+                            $('#video').html(template('videoUrl',{videoUrl:data['url']}));
+                            $('#videoBox').show();
                         }else{
                             layer.msg(data['msg']);
                         }
@@ -362,6 +390,10 @@ $this->title = '数据列表';
 
                 })
             }
+        })
+
+        $('#videoBox .close').click(function(){
+            $('#videoBox').hide();
         })
 
         $(window).scroll(function() {
@@ -372,8 +404,13 @@ $this->title = '数据列表';
             }else{
                 $(".panel").css("opacity",'0.8');
                 $(".panel").css("background",'#fff');
-//                $("div.navbar").css("position","absolute");
             }
         });
     })
+</script>
+<!--视频播放-->
+<script id="videoUrl" type="text/html">
+    <video width="100%" height="100%" controls="controls">
+        <source src="<%=videoUrl%>" type="video/mp4" ></source>
+    </video>
 </script>

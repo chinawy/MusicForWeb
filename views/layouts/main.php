@@ -8,7 +8,9 @@ use yii\helpers\Html;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YiizzzzzzzzzziiY</title>
+    <meta name="referrer" content="never">
+    <link type="image/x-icon" href="/public/images/favicon.ico" rel="shortcut icon">
+    <title>Music FOR Web</title>
     <!--引入插件-->
     <?= Html::jsFile('@web/public/jquery/jquery.min.js') ?>
     <?= Html::cssFile('@web/public/bootstrap/css/bootstrap.min.css') ?>
