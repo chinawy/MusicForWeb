@@ -15,7 +15,7 @@ $this->title = '数据列表';
 <style>
     body{
         /* 加载背景图 */
-        background-image : url("/public/images/bg.jpg");
+        background-image : url("/public/images/bg2.jpg");
         /* 背景图垂直、水平均居中 */
         background-position: center center;
         /* 背景图不平铺 */
