@@ -155,7 +155,7 @@ $this->title = '数据列表';
         <div id="logo"></div>
         <div class="col-lg-5 vertical-center">
             <div class="input-group input-group-lg">
-                <input type="text" class="form-control keyword" placeholder="客官不要点我(～￣▽￣)～...">
+                <input type="text" class="form-control keyword" placeholder="(～￣▽￣)～...">
         <span class="input-group-btn">
             <a href="javascript:;" class="btn btn-default search glyphicon glyphicon-search"></a>
         </span>
