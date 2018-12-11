@@ -17,7 +17,7 @@ class IndexController extends Controller
 
     public function init(){
         parent::init();
-        //test
+        //test1
         $app = YII::$app;
         $this->appRequest = $app->request;
     }
